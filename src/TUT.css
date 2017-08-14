@@ -1,20 +1,33 @@
-.App {
-  text-align: center;
-}
-
 .App-header {
   background-color: #01579b;
-  font-size: 2em;
-  height: 200px;
-  padding: 20px;
+  height: 35vh;
   color: #fff8e1;
+}
+
+.heading {
+  font-size: 5em;
   font-family: 'Righteous', cursive;
 }
 
-.tagline {
-  font-family: 'Pontano Sans', sans-serif;
+.about-card {
+  top: 15vh;
 }
 
-.App-intro {
-  font-size: large;
+.signup {
+  font-size: 2em;
+  top: 40vh;
+}
+
+.signup-text {
+  color: #fff;
+}
+
+.navpanel {
+  height: 100%;
+  padding-top: 15px;
+  display: inline-block;
+}
+
+.user-card {
+  padding: 15px 10px;
 }
