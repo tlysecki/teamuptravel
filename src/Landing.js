@@ -1,56 +1,90 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 import './TUT.css';
 
-class Landing extends Component {
+
+export default class Landing extends Component {
    constructor() {
       super();
       this.state = {
-         login: true
+         open: false,
+         username: '',
+      };
+      this.login = this.login.bind(this);
+   }
+
+   //conditional on componentDidUpdate that looks to see if there is a username in the state, if not, render login page, if yes, render user home
+
+
+   handleOpen = () => {
+      this.setState({ open: true });
+   };
+
+   handleClose = () => {
+      this.setState({ open: false });
+   };
+
+   login(e) {
+      e.preventDefault();
+      if (this.refs.username.value === "joeuser" && this.refs.password.value === "bestpasswordever") {
+         console.log('you logged in so good')
+         this.setState({
+            open: false,
+            username: this.refs.username.value
+         })
+         // serve userhome page here
+      } else {
+         alert('you did not log in so good')
       }
    }
 
+
    render() {
 
-      return (
-         <div className="App">
-            <nav className="App-header">
-               <Link className="signup-text right-align" to="/login">Login</Link>
-               <h1 className="heading center">Teamup Travel</h1>
-               <h3 className="tagline center">find friends and get lost</h3>
-            </nav>
-            <div className="row">
-               <div className="col s3 navpanel">
-                  <div className="container">
-                     <table className="collection">
-                        <tr className="collection-item">Your Teams
-                        <ul>
-                              <li>• Itinerary</li>
-                              <li>• Message Board</li>
-                              <li>• Make A New Team</li>
-                           </ul>
-                        </tr>
-                        <tr className="collection-item">World Map</tr>
-                        <tr className="collection-item">Wannagos</tr>
-                        <tr className="collection-item">Home</tr>
-                     </table>
-                  </div>
-               </div>
-            </div>
+      const actions = [
+         <FlatButton
+            label="Cancel"
+            primary={true}
+            onClick={this.handleClose}
+         />,
+         <FlatButton
+            label="Submit"
+            primary={true}
+            disabled={false}
+            onClick={this.login}
+         />,
+      ];
 
-            {this.props.children}
+      return (
+         <div>
+            <MuiThemeProvider>
+               <AppBar showMenuIconButton={false} title={<span style={{ cursor: 'pointer' }}>Team Up Travel</span>}
+                  iconElementRight={
+                     <span>
+                        <FlatButton label="login" onClick={this.handleOpen} />
+                        <Dialog
+                           title="Login"
+                           actions={actions}
+                           modal={true}
+                           open={this.state.open}
+                        >
+                           Username:<input ref="username" type="text" />
+                           Password:<input ref="password" type="password" />
+                        </Dialog>
+                     </span>}
+               />
+            </MuiThemeProvider>         
+
+            <div className="container">
+                  {this.props.children}
+               </div>
 
          </div>
-      );
+
+            );
    }
 }
-
-export default Landing;
-
-/*
- <p className="App-intro">
-               Here's the landing page
-        </p>
-            <Link to="/about">About</Link><br />
-            <Link to="/signup">Sign Up</Link> <br />
-            <Link to="/login">Login</Link>  */

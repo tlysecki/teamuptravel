@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 import './TUT.css';
 
 class Home extends Component {
+ 
    render() {
+
       return (
-         <div className="home-page">
-            <button className="col s2 offset-s1 signup btn waves-effect waves-light orange-darken4">
-               <Link className="signup-text" to="/signup">Sign Up Now</Link>
-            </button>
-            <button className="col s2 offset-s1 signup btn waves-effect waves-light orange-darken4">
-               <Link className="signup-text" to="/about">About Team Up Travel</Link>
-            </button>
+         <div>
+            <MuiThemeProvider>
+                  <div className="row">
+
+                     <Link to="/about">
+                        <RaisedButton label="About Us"></RaisedButton>
+                     </Link>
+
+                     <Link to="/signup">
+                        <RaisedButton primary={true} label="Sign Up Now"></RaisedButton>
+                     </Link>
+
+                  </div>
+            </MuiThemeProvider>
+
          </div>
       );
    }
 }
+
 
 export default Home;

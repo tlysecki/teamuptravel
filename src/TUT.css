@@ -1,12 +1,14 @@
 .App-header {
   background-color: #01579b;
-  height: 35vh;
-  color: #fff8e1;
+  height: 30vh;
+  color: #F5F5F5;
 }
 
 .heading {
   font-size: 5em;
   font-family: 'Righteous', cursive;
+  margin-top: 0vh;
+  padding-top: 5vh;
 }
 
 .about-card {
@@ -17,17 +19,23 @@
   font-size: 2em;
   top: 40vh;
 }
-
-.signup-text {
+ 
+.button-text {
   color: #fff;
-}
+} 
 
 .navpanel {
-  height: 100%;
-  padding-top: 15px;
   display: inline-block;
 }
 
-.user-card {
-  padding: 15px 10px;
+.collection {
+  height: 100%;
+}
+
+.collection-item {
+  padding: 10px 5px;
+}
+
+.sample-user {
+  margin-top: 5vh;
 }

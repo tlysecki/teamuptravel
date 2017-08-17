@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import DatePicker from 'material-ui/DatePicker';
 import './TUT.css';
 
 class Signup extends Component {
@@ -11,12 +12,14 @@ class Signup extends Component {
                </p>
                <div className="row">
                   <form className="col s10 offset-s1">
-                     <input type="text" placeholder="Username" required />
-                     <input type="text" placeholder="First Name" required />
-                     <input type="text" placeholder="Last Name" required />
-                     <input type="email" placeholder="Email Address" required />
-                     <input type="password" placeholder="Password" required />
-                     <input type="password" placeholder="Confirm Password" required />
+                     Username:<input type="text" required />
+                     First Name:<input type="text" required />
+                     Last Name:<input type="text" required />
+                     Age:<input type="text" required />
+                     Current Location:<input type="text" placeholder="City, Country" required />
+                     Perks:<input type="text" placeholder="What makes you a great team member? What makes you you?" required />
+                     Email:<input type="email" required />
+                     Password:<input type="password" required />
                      <button type="submit">Submit</button>
                   </form>
                </div>

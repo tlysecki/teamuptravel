@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './TUT.css';
 
 class About extends Component {
@@ -16,9 +18,11 @@ class About extends Component {
             </div>
           </div>
           <div>
-            <button className="col s2 offset-s1 signup btn waves-effect waves-light orange-darken4"> 
-              <Link className="signup-text" to="/signup">Sign Up Now</Link>
-            </button>
+             <MuiThemeProvider>
+              <Link className="button-text" to="/signup">
+                <RaisedButton primary={true} label="Sign Up Now" />
+              </Link>
+              </MuiThemeProvider>
           </div>
         </div>
       </div>
