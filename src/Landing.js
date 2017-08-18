@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -30,16 +31,18 @@ export default class Landing extends Component {
 
    login(e) {
       e.preventDefault();
-      if (this.refs.username.value === "joeuser" && this.refs.password.value === "bestpasswordever") {
-         console.log('you logged in so good')
+      // if (this.refs.username.value === "joeuser" && this.refs.password.value === "bestpasswordever") {
+      //    console.log('you logged in so good')
          this.setState({
-            open: false,
-            username: this.refs.username.value
+            open: false
          })
-         // serve userhome page here
-      } else {
-         alert('you did not log in so good')
-      }
+         axios.post('http://localhost:8080/login', {username: this.refs.username.value, password: this.refs.password.value})
+              .then(res=> {console.log(res); window.location="http://localhost:3000/home"})
+              .catch(err=> console.log(err))
+       
+      // else {
+         // alert('you did not log in so good')
+      // }
    }
 
 
@@ -62,7 +65,7 @@ export default class Landing extends Component {
       return (
          <div>
             <MuiThemeProvider>
-               <AppBar showMenuIconButton={false} title={<span style={{ cursor: 'pointer' }}>Team Up Travel</span>}
+               <AppBar showMenuIconButton={!this.state.username ? false: true} title={<span style={{ cursor: 'pointer' }}>Team Up Travel</span>}
                   iconElementRight={
                      <span>
                         <FlatButton label="login" onClick={this.handleOpen} />

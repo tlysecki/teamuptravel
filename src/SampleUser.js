@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import Subheader from 'material-ui/Subheader';
+import Popover from 'material-ui/Popover';
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
 import {List, ListItem} from 'material-ui/List';
 import './TUT.css';
@@ -27,8 +30,7 @@ class SampleUser extends Component {
                            <ListItem primaryText="Perks: I fit inside of carry-on so we save on plane tickets." />
                            <Divider />
                            <Subheader>Wannagos</Subheader>
-                              <ListItem key={1} primaryText="Somewhere Else" />
-                              <ListItem key={2} primaryText="Another Place" />
+                              <Wannago />
                         </List>
                   </CardText>
                </Card>
@@ -38,5 +40,53 @@ class SampleUser extends Component {
       );
    }
 }
+
+class Wannago extends React.Component {
+      
+         constructor(props) {
+            super(props);
+            this.state = { open: false };
+         }
+      
+         handleTouchTap = (event) => {
+            event.preventDefault();
+            this.setState({
+              open: true,
+              anchorEl: event.currentTarget,
+            });
+          };
+        
+          handleRequestClose = () => {
+            this.setState({
+              open: false,
+            });
+          };
+      
+         render() {
+            return (
+               <div>
+                  <FlatButton
+                     label="Name of Wannago 1"
+                     onTouchTap={this.handleTouchTap}
+                  />
+                  <Popover
+                     open={this.state.open}
+                     anchorEl={this.state.anchorEl}
+                     anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+                     targetOrigin={{ horizontal: 'left', vertical: 'top' }}
+                     onRequestClose={this.handleRequestClose}
+                  >
+                     <MenuItem>Where: Tanzania</MenuItem>
+                     <MenuItem>Style: adventure/fitness</MenuItem>
+                     <MenuItem>Budget: moderate</MenuItem>
+                     <MenuItem>When: May 12 - May 26</MenuItem>
+                     <MenuItem>Why: I want to climb Killimanjaro!</MenuItem>
+                     <FlatButton fullWidth={true} label="Message me!"/>
+                  </Popover>
+               </div>
+            );
+         }
+      }
+
 
 export default SampleUser;
