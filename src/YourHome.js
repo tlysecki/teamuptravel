@@ -103,7 +103,7 @@ class YourHome extends Component {
                            <Avatar src={this.state.user.user_img} />
                         }
                      >
-                        Welcome, {this.state.user.username}
+                        welcome, {this.state.user.username}
                         <Link to="/worldmap">
                            <IconButton tooltip="World Map" iconClassName="material-icons">
                               public
@@ -118,7 +118,7 @@ class YourHome extends Component {
                         <Subheader>
                            Your Team
                            </Subheader>
-                        <Link to="/peru2017">
+                        <Link to="/teams/peru2017">
                            <ListItem primaryText="Peru 2017" />
                         </Link>
                         <Divider />

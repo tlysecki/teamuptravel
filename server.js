@@ -110,10 +110,32 @@ app.post('/signup', (req, res) => {
 
 //TEAM ROUTES
 
-app.post('/newteam', (req, res) => {
-   const newTeam = new Team(req.body)
-   //need this to create a new conversation for the team as well
+app.get('/teams/:team', (req, res) => {
+   console.log(req.params.team)
+   Team.findOne({"team_name":req.params.team})
+      .then(team => {
+         console.log(team);
+         if (team.conversations.length > 0) {
+            var teamConversation = Promise.all(
+               team.conversations.map(conversation => {
+                  return Conversation.findById(conversation.id)
+                     .then(convo => { return convo })
+                     .catch(err => { return err })
+               })
+            )
+               .then(convo => { res.json({team, convo}) })
+               .catch(err => { console.log(err) })
+         } else {
+            res.json({ user, convo: [] })
+         }
+      })
+      .catch(err => { console.log(err) })
 })
+
+// app.post('/newteam', (req, res) => {
+//    const newTeam = new Team(req.body)
+//    //need this to create a new conversation for the team as well
+// })
 
 //WANNAGOS
 
@@ -145,25 +167,7 @@ app.get('/wannagos', (req, res) => {
 
 //MESSAGE ROUTES
 
-app.get('/:team', (req, res) => {
-   Team.findOne({"team_name":req.params.team})
-      .then(team => {
-         if (team.conversations.length > 0) {
-            var teamConversation = Promise.all(
-               team.conversations.map(conversation => {
-                  return Conversation.findById(conversation.id)
-                     .then(convo => { return convo })
-                     .catch(err => { return err })
-               })
-            )
-               .then(convo => { res.json({team, convo}) })
-               .catch(err => { console.log(err) })
-         } else {
-            res.json({ user, convo: [] })
-         }
-      })
-      .catch(err => { console.log(err) })
-})
+
 
 
 

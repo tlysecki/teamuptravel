@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FlatButton from 'material-ui/FlatButton';
 import Popover from 'material-ui/Popover';
@@ -10,8 +10,9 @@ import { red500 } from 'material-ui/styles/colors';
 import './TUT.css';
 
 const iconStyles = {
-  left: 374,
-  top: 335
+  position: 'absolute', 
+  top: '61%', 
+  left: '45%',
 };
 
 class WorldMap extends Component {
@@ -124,17 +125,19 @@ class WorldMap extends Component {
             </Popover>
           </div>
         </MuiThemeProvider>
-        <div width={800}>
-          <MuiThemeProvider>
-            <Link to="/home/team">
-              <IconButton tooltip="Peru Sep 21-23"
-                iconClassName="material-icons"
-                color={red500}
-                style={iconStyles} >place</IconButton>
-            </Link>
-          </MuiThemeProvider>
-          <img width={800} src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=1&size=800x350&maptype=roadmap&%7C-14.702147,-74.015794" alt="World Map" />
-        </div>
+        <MuiThemeProvider>
+          <div style={{position: "relative"}}>
+          
+            <img style={{width: '100%', height: '100%'}} src="./images/worldmap.png" alt="World Map" />
+            <IconButton tooltip="Peru Sep 21-23"
+            iconClassName="material-icons"
+            color={red500}
+            style={iconStyles}
+            onClick={() => { browserHistory.push('/teams/peru2017') }} >place</IconButton>
+
+         
+            </div>
+        </MuiThemeProvider>
       </div>
 
     );
