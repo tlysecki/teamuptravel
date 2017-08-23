@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { amber400 } from 'material-ui/styles/colors';
+import { amber400, blueGrey800 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-import axios from 'axios';
-import {browserHistory} from 'react-router';
 import './TUT.css';
 
 class Home extends Component {
@@ -17,15 +14,18 @@ class Home extends Component {
             <div className="hero-body">
                <MuiThemeProvider>
                   <div>
-                     <h1 style={{ marginTop: -40 }}>find friends and get lost.</h1>
+                     <h1 style={{ fontSize:"3.7em" }}>find friends and get lost.</h1>
                      <div>
                         <Link to="/signup">
-                           <RaisedButton zIndex={4} className="large" backgroundColor={amber400} style={{ marginTop: 35 }} labelStyle={{ fontSize:32, color:"#000" }} label="Sign Up Now"></RaisedButton>
+                           <RaisedButton className="large" 
+                                         backgroundColor={amber400} 
+                                         style={{ marginTop: 35 }} labelStyle={{ fontSize:33, color:blueGrey800 }} 
+                                         label="Sign Up Now" />
                         </Link>
                      </div>
                      <div>
                         <Link to="/about">
-                           <RaisedButton className="right" style={{ marginTop:150, opacity: 0.7 }} labelStyle={{ fontSize: 12 }} label="Find Out More"></RaisedButton>
+                           <RaisedButton className="right" style={{ marginTop:150, marginRight:-50, opacity: 0.7 }} labelStyle={{ fontSize: 12 }} label="Find Out More"></RaisedButton>
                         </Link>
                      </div>
                   </div>

@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { yellow800, blueGrey500, blueGrey900 } from 'material-ui/styles/colors';
+import { yellow800, blueGrey900 } from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -26,9 +26,6 @@ export default class Landing extends Component {
       this.signOut = this.signOut.bind(this);
       this.successfulSignup = this.successfulSignup.bind(this);
    }
-
-   //conditional on componentDidUpdate that looks to see if there is a username in the state, if not, render login page, if yes, render user home
-
 
    handleOpen = () => {
       this.setState({ open: true });
@@ -55,6 +52,8 @@ export default class Landing extends Component {
    successfulSignup(username) {
       this.setState({
          username: username
+      }, ()=> {
+            localStorage.username = this.state.username            
       });
    }
 
@@ -81,7 +80,7 @@ export default class Landing extends Component {
 
       const muiTheme = getMuiTheme({
          palette: {
-            color: blueGrey500,
+
          },
          appBar: {
             height: 100,
@@ -143,7 +142,7 @@ export default class Landing extends Component {
                </div>
             </MuiThemeProvider>
 
-            <div className="container">
+            <div>
                {React.cloneElement(this.props.children, { username: this.state.username, successfulSignup: this.successfulSignup })}
             </div>
 

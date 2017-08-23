@@ -33,6 +33,8 @@ connection.on('error', (err) => {
 
 //USER ROUTES
 
+//  get user homepage
+
 app.get('/home/:user', (req, res) => {
    User.findOne({ username: req.params.user })
       .then(user => {
@@ -44,18 +46,43 @@ app.get('/home/:user', (req, res) => {
                      .catch(err => { return err })
                })
             )
-               .then(found => { res.json({user, found}) })
+               .then(found => { res.json({ user, found }) })
                .catch(err => { console.log(err) })
          } else {
-         res.json({user, found:[]})
+            res.json({ user, found: [] })
          }
       })
       .catch(err => { console.log(err) })
 })
 
+
+//  view another user
+
+app.get('/user/:username', (req, res) => {
+   User.findOne({"username":req.params.username})
+      .then(user => {
+         if (user.wannagos.length > 0) {
+            var userWannagos = Promise.all(
+               user.wannagos.map(wannago => {
+                  return Wannago.findById(wannago)
+                     .then(found => { return found })
+                     .catch(err => { return err })
+               })
+            )
+               .then(found => { res.json({ user, found }) })
+               .catch(err => { console.log(err) })
+         } else {
+            res.json({ user, found: [] })
+         }
+      })
+      .catch(err => { console.log(err) })
+})
+
+
+
 app.post('/login', (req, res) => {
    User.findOne({ username: req.body.username })
-       .then(user => {
+      .then(user => {
          if (user.password === req.body.password) {
             res.send(user)
          } else {

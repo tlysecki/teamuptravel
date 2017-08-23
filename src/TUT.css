@@ -1,14 +1,8 @@
-.App-header {
-  background-color: #01579b;
-  height: 30vh;
-  color: #F5F5F5;
-}
-
 .hero-image{
   background-image: url("https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg");
   height: 60vh;
-  width: 110vw;
-  margin-left: -205px;
+  width: 100vw;
+  margin: 0 auto;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,38 +10,10 @@
 }
 
 .hero-body {
+  font-family: 'Pontano-sans', sans-serif;
   text-align: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-.about-card {
-  top: 15vh;
-}
-
-.signup {
-  font-size: 2em;
-  top: 40vh;
-}
- 
-.button-text {
-  color: #fff;
-} 
-
-.navpanel {
-  display: inline-block;
-}
-
-.collection {
-  height: 100%;
-}
-
-.collection-item {
-  padding: 10px 5px;
-}
-
-.sample-user {
-  margin-top: 5vh;
 }

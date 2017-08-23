@@ -13,6 +13,7 @@ import Divider from 'material-ui/Divider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './TUT.css';
 
+
 class YourTeam extends Component {
    constructor() {
       super();
@@ -28,7 +29,7 @@ class YourTeam extends Component {
 
    render() {
       return (
-         <div className="about-page">
+         <div style={{paddingTop:"5vh"}}>
             <div className="container">
                <MuiThemeProvider>
                   <Card expanded={this.state.expanded}>

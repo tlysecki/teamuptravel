@@ -26,7 +26,7 @@ ReactDOM.render(
          <Route path='/worldmap' component={WorldMap} />
             <Route path='/home/team' component={YourTeam} />
          <Route path='/signup' component={Signup} />
-         <Route path='/another-user' component={SampleUser} />
+         <Route path='/user/:username' component={SampleUser} />
       </Route>
    </Router>
 , document.getElementById('root'));
