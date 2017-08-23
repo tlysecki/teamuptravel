@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { yellow800, blueGrey500, } from 'material-ui/styles/colors';
+import { yellow800, blueGrey500, blueGrey900 } from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -106,7 +106,7 @@ export default class Landing extends Component {
       return (
          <div>
             <MuiThemeProvider muiTheme={muiTheme}>
-               <AppBar showMenuIconButton={false} title={<Link to="/home" style={{ cursor: 'pointer', color: '#FFF' }}>Team Up Travel</Link>}
+               <AppBar showMenuIconButton={false} title={<Link to="/home" style={{ paddingLeft:25, fontSize:45, fontFamily:"'Righteous', cursive", color: blueGrey900 }}>Team Up Travel</Link>}
                   iconElementRight={
                      <span>
                         <RaisedButton label="Your Locker"
