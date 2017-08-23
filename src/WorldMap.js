@@ -10,8 +10,8 @@ import { red500 } from 'material-ui/styles/colors';
 import './TUT.css';
 
 const iconStyles = {
-  left: 214,
-  top: 295
+  left: 374,
+  top: 335
 };
 
 class WorldMap extends Component {
@@ -133,7 +133,7 @@ class WorldMap extends Component {
                 style={iconStyles} >place</IconButton>
             </Link>
           </MuiThemeProvider>
-          <img width={800} src="https://upload.wikimedia.org/wikipedia/commons/9/91/Winkel_triple_projection_SW.jpg" alt="World Map" />
+          <img width={800} src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=1&size=800x350&maptype=roadmap&%7C-14.702147,-74.015794" alt="World Map" />
         </div>
       </div>
 

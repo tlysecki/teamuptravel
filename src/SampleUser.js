@@ -41,7 +41,7 @@ class SampleUser extends Component {
 
             <MuiThemeProvider>
                <div style={{marginTop:"5vh"}} className="row">
-                  <Card className="col s10 offset-s1">
+                  <Card className="col s10 offset-s1 m8 offset-m2">
                      <CardMedia style={{paddingTop: 10 }} overlay={<CardTitle title={this.state.user.username} />}>
                         <img src={user.user_img} alt="Sample User" />
                      </CardMedia>

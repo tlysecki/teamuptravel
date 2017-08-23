@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
 const conversationSchema = new Schema({
 
    users: [Schema.Types.ObjectId],
-   messages: [messageSchema]
+   messages: [Schema.Types.ObjectId]
 
 });
 

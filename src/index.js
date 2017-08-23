@@ -24,7 +24,7 @@ ReactDOM.render(
          <Route path='/about' component={About} />
          <Route path='/home' component={YourHome} />
          <Route path='/worldmap' component={WorldMap} />
-            <Route path='/home/team' component={YourTeam} />
+            <Route path='/:team_name' component={YourTeam} />
          <Route path='/signup' component={Signup} />
          <Route path='/user/:username' component={SampleUser} />
       </Route>

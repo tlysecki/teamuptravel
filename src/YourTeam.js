@@ -11,6 +11,7 @@ import {
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import axios from 'axios';
 import './TUT.css';
 
 
@@ -18,9 +19,23 @@ class YourTeam extends Component {
    constructor() {
       super();
       this.state = {
-         expanded: false
+         expanded: false,
+         team: {},
+         convos: []
       }
       this.messageExpand = this.messageExpand.bind(this);
+   }
+
+   componentWillMount() {
+      const getTeam = axios.get('http://localhost:8080' + this.props.location.pathname);
+      getTeam.then((teamObj) => {
+         const convo = teamObj.data.convo.filter(e => e !== null);
+         this.setState({
+            team: teamObj.data.team,
+            convos: convo
+         })
+      })
+         .catch(err => { console.log(err) })
    }
 
    messageExpand = () => {
@@ -29,12 +44,12 @@ class YourTeam extends Component {
 
    render() {
       return (
-         <div style={{paddingTop:"5vh"}}>
-            <div className="container">
+         <div style={{ paddingTop: "5vh" }}>
+            <div className="row" >
                <MuiThemeProvider>
-                  <Card expanded={this.state.expanded}>
+                  <Card className="col s10 offset-s1 m8 offset-m2" expanded={this.state.expanded}>
                      <CardHeader
-                        title="Peru 2017"
+                        title={this.state.team.team_name}
                         subtitle="You, Jane User, Joe User"
                         actAsExpander={false}
                      />

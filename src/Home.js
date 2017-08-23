@@ -14,18 +14,18 @@ class Home extends Component {
             <div className="hero-body">
                <MuiThemeProvider>
                   <div>
-                     <h1 style={{ fontSize:"3.7em" }}>find friends and get lost.</h1>
+                     <h1 style={{ fontSize:"3.7em" }}>find friends and get lost</h1>
                      <div>
                         <Link to="/signup">
                            <RaisedButton className="large" 
                                          backgroundColor={amber400} 
-                                         style={{ marginTop: 35 }} labelStyle={{ fontSize:33, color:blueGrey800 }} 
+                                         style={{ marginTop: 95 }} labelStyle={{ fontSize:33, color:blueGrey800 }} 
                                          label="Sign Up Now" />
                         </Link>
                      </div>
                      <div>
                         <Link to="/about">
-                           <RaisedButton className="right" style={{ marginTop:150, marginRight:-50, opacity: 0.7 }} labelStyle={{ fontSize: 12 }} label="Find Out More"></RaisedButton>
+                           <RaisedButton className="right" style={{ marginTop:70, marginRight:-50, opacity: 0.7 }} labelStyle={{ fontSize: 12 }} label="Find Out More"></RaisedButton>
                         </Link>
                      </div>
                   </div>

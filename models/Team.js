@@ -6,8 +6,8 @@ const teamSchema = new Schema({
 
    team_name: {type: String, required: true, unique: true},
    style: String,
-   date_start: {type: String, required: true},
-   date_end: {type: String, required: true},
+   date_start: {type: Date, required: true},
+   date_end: {type: Date, required: true},
    users: [Schema.Types.ObjectId],
    conversations: [conversationSchema]
 

@@ -145,6 +145,25 @@ app.get('/wannagos', (req, res) => {
 
 //MESSAGE ROUTES
 
+app.get('/:team', (req, res) => {
+   Team.findOne({"team_name":req.params.team})
+      .then(team => {
+         if (team.conversations.length > 0) {
+            var teamConversation = Promise.all(
+               team.conversations.map(conversation => {
+                  return Conversation.findById(conversation.id)
+                     .then(convo => { return convo })
+                     .catch(err => { return err })
+               })
+            )
+               .then(convo => { res.json({team, convo}) })
+               .catch(err => { console.log(err) })
+         } else {
+            res.json({ user, convo: [] })
+         }
+      })
+      .catch(err => { console.log(err) })
+})
 
 
 
