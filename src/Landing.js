@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 import { Link } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { yellow800, blueGrey500, } from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 import './TUT.css';
 
 
@@ -13,9 +19,12 @@ export default class Landing extends Component {
       super();
       this.state = {
          open: false,
-         username: '',
+         openLocker: false,
+         username: localStorage.username,
       };
       this.login = this.login.bind(this);
+      this.signOut = this.signOut.bind(this);
+      this.successfulSignup = this.successfulSignup.bind(this);
    }
 
    //conditional on componentDidUpdate that looks to see if there is a username in the state, if not, render login page, if yes, render user home
@@ -29,24 +38,56 @@ export default class Landing extends Component {
       this.setState({ open: false });
    };
 
+   lockerToggle = () => this.setState({ openLocker: !this.state.openLocker });
+
+   lockerClose = () => this.setState({ openLocker: false });
+
+   signOut = () => {
+      this.lockerClose();
+      this.setState({
+         open: false,
+         username: ''
+      })
+      localStorage.username = '';
+      
+   }
+
+   successfulSignup(username) {
+      this.setState({
+         username: username
+      });
+   }
+
    login(e) {
       e.preventDefault();
-      // if (this.refs.username.value === "joeuser" && this.refs.password.value === "bestpasswordever") {
-      //    console.log('you logged in so good')
-         this.setState({
-            open: false
+
+      axios.post('http://localhost:8080/login', { username: this.refs.username.value, password: this.refs.password.value })
+         .then(res => {
+            this.setState({
+               username: this.refs.username.value,
+               open: false
+            })
+            browserHistory.push("/home")
          })
-         axios.post('http://localhost:8080/login', {username: this.refs.username.value, password: this.refs.password.value})
-              .then(res=> {console.log(res); window.location="http://localhost:3000/home"})
-              .catch(err=> console.log(err))
-       
-      // else {
-         // alert('you did not log in so good')
-      // }
+         .catch(err=>{
+            console.log(err)
+            alert('Do not pass GO; do not collect $200')
+         })
+      localStorage.username = this.refs.username.value;
    }
 
 
    render() {
+
+      const muiTheme = getMuiTheme({
+         palette: {
+            color: blueGrey500,
+         },
+         appBar: {
+            height: 100,
+            color: yellow800,
+         },
+      })
 
       const actions = [
          <FlatButton
@@ -64,30 +105,50 @@ export default class Landing extends Component {
 
       return (
          <div>
-            <MuiThemeProvider>
-               <AppBar showMenuIconButton={!this.state.username ? false: true} title={<span style={{ cursor: 'pointer' }}>Team Up Travel</span>}
+            <MuiThemeProvider muiTheme={muiTheme}>
+               <AppBar showMenuIconButton={false} title={<Link to="/home" style={{ cursor: 'pointer', color: '#FFF' }}>Team Up Travel</Link>}
                   iconElementRight={
                      <span>
-                        <FlatButton label="login" onClick={this.handleOpen} />
+                        <RaisedButton label="Your Locker"
+                           onTouchTap={this.lockerToggle}
+                           style={{ display: this.state.username ? '' : 'none' }}
+                        />
+                        <FlatButton label="login"
+                           onTouchTap={this.handleOpen}
+                           style={{ display: !this.state.username ? '' : 'none' }} />
                         <Dialog
                            title="Login"
                            actions={actions}
                            modal={true}
-                           open={this.state.open}
-                        >
+                           open={this.state.open}>
                            Username:<input ref="username" type="text" />
                            Password:<input ref="password" type="password" />
                         </Dialog>
                      </span>}
                />
-            </MuiThemeProvider>         
+            </MuiThemeProvider>
+            <MuiThemeProvider>
+               <div>
+                  <Drawer
+                     docked={false}
+                     width={200}
+                     open={this.state.openLocker}
+                     onRequestChange={(openLocker) => this.setState({ openLocker })}
+                  >
+                     <Link to="/home"><MenuItem style={{padding:10,fontSize:20}} onTouchTap={this.lockerClose}>Your Home</MenuItem></Link>
+                     <Link to="/worldmap"><MenuItem onTouchTap={this.lockerClose}>World Map</MenuItem></Link>
+                     <Link to="/home"><MenuItem disabled={true} onTouchTap={this.lockerClose}>Inbox</MenuItem></Link>
+                     <Link to="/"><MenuItem onTouchTap={this.signOut}>Sign Out</MenuItem></Link>
+                  </Drawer>
+               </div>
+            </MuiThemeProvider>
 
             <div className="container">
-                  {this.props.children}
-               </div>
+               {React.cloneElement(this.props.children, { username: this.state.username, successfulSignup: this.successfulSignup })}
+            </div>
 
          </div>
 
-            );
+      );
    }
 }

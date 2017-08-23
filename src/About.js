@@ -1,29 +1,33 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './TUT.css';
 
 class About extends Component {
   render() {
     return (
-      <div className="about-page">
-        <div className="row">
-          <div className="col s5 offset-s1">
-            <div className="about-card card blue-grey lighten-3">
-              <div className="card-content black-text">
-                <span className="card-title">About Team Up Travel</span>
-                <p>Here's all the About stuff. Blah blah blah</p>
-              </div>
-            </div>
-          </div>
-          <div>
-             <MuiThemeProvider>
-              <Link className="button-text" to="/signup">
-                <RaisedButton primary={true} label="Sign Up Now" />
-              </Link>
+      <div>
+        <MuiThemeProvider>
+          <Card>
+            <CardTitle title="About Our Site" subtitle=""/>
+            <CardText>
+              Team Up Travel is the best place to find travel companions. Define the type of traveller you are, your budget, and where you want to go to locate others like you. Or, check out the world map to find others, create a team, and live out any adventure you can dream up.
+          </CardText>
+            <CardActions>
+
+              <MuiThemeProvider>
+                <Link className="button-text" to="/signup">
+                  <RaisedButton fullWidth={true} label="Sign Up Now" />
+                </Link>
               </MuiThemeProvider>
-          </div>
+
+            </CardActions>
+          </Card>
+        </MuiThemeProvider>
+        <div>
+
         </div>
       </div>
     );

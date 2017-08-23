@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './TUT.css';
 import axios from 'axios';
+import {browserHistory} from 'react-router';
 
 class Signup extends Component {
 constructor(){
    super();
    this.state = {
       username: '',
+      user_img: '',
       first_name: '',
       last_name: '',
       age: 0,
@@ -24,15 +26,21 @@ constructor(){
       d.preventDefault();
       console.log(this.state);
       axios.post('http://localhost:8080/signup', this.state)
+           .then(res => {
+            this.props.successfulSignup(this.state.username);
+            browserHistory.push("/home")
+            })
+           .catch(err=>{
+              console.log(err)
+              alert('Signup didn\'t work for some reason.')
+     })
    }
 
    change=e=> {
       this.setState({
-         [e.target.name]: e.target.value
+         [e.target.name]: e.target.value.toLowerCase()
       })
    }
-
-
 
 
    render() {
@@ -45,6 +53,7 @@ constructor(){
                <div className="row">
                   <form onSubmit={this.signup} className="col s10 offset-s1">
                      Username:<input onChange={this.change} name="username" type="text" required />
+                     Image URL:<input onChange={this.change} name="user_img" type="text" required />
                      First Name:<input onChange={this.change} name="first_name" type="text" required />
                      Last Name:<input onChange={this.change} name="last_name" type="text" required />
                      Age:<input onChange={this.change} name="age" type="text" required />
@@ -55,10 +64,7 @@ constructor(){
                      <button type="submit">Submit</button>
                   </form>
                </div>
-
             </div>
-
-
          </div>
       );
    }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import {
@@ -8,14 +7,14 @@ import {
    TableHeaderColumn,
    TableRow,
    TableRowColumn,
- } from 'material-ui/Table';
+} from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './TUT.css';
 
 class YourTeam extends Component {
-   constructor(){
+   constructor() {
       super();
       this.state = {
          expanded: false
@@ -24,30 +23,30 @@ class YourTeam extends Component {
    }
 
    messageExpand = () => {
-      this.setState({expanded: !this.state.expanded});
-    };
+      this.setState({ expanded: !this.state.expanded });
+   };
 
    render() {
       return (
          <div className="about-page">
             <div className="container">
                <MuiThemeProvider>
-                  <Card expanded={this.state.expanded}
-                  >
+                  <Card expanded={this.state.expanded}>
                      <CardHeader
                         title="Peru 2017"
-                        subtitle="show list of members"
-                        actAsExpander={true}
+                        subtitle="You, Jane User, Joe User"
+                        actAsExpander={false}
                      />
                      <CardText>
                         Sept 21: Arrive at hotel
-                        <Divider/>
+                        <Divider />
                         Sept 22: Salt flats, Dinner with locals
-                        <Divider/>
+                        <Divider />
                         Sept 23: Flight out!
                      </CardText>
                      <CardActions>
-                        <FlatButton label="Messages" onTouchTap={this.messageExpand}/>
+                        <FlatButton label="Messages" onTouchTap={this.messageExpand} />
+                        <FlatButton className="right" label="Add to Itinerary" disabled={true} />
                      </CardActions>
                      <CardText expandable={true}>
                         <Table height="200px" >
@@ -68,11 +67,12 @@ class YourTeam extends Component {
                         </Table>
                         <Divider />
                         <TextField
-                        hintText="send a message"
-                        multiLine={true}
-                        rows={2}
-                        rowsMax={3}
-                     />
+                           fullWidth={true}
+                           hintText="send a message"
+                           multiLine={true}
+                           rows={1}
+                           rowsMax={3}
+                        />
                      </CardText>
 
                   </Card>

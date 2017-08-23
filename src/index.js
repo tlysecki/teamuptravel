@@ -4,6 +4,7 @@ import './index.css';
 import Home from './Home';
 import YourHome from './YourHome';
 import YourTeam from './YourTeam';
+import WorldMap from './WorldMap';
 import About from './About';
 import Landing from './Landing';
 import Signup from './Signup';
@@ -22,6 +23,7 @@ ReactDOM.render(
          <IndexRoute component={Home} />
          <Route path='/about' component={About} />
          <Route path='/home' component={YourHome} />
+         <Route path='/worldmap' component={WorldMap} />
             <Route path='/home/team' component={YourTeam} />
          <Route path='/signup' component={Signup} />
          <Route path='/another-user' component={SampleUser} />
